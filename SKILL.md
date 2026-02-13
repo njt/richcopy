@@ -18,11 +18,11 @@ Interpret $ARGUMENTS to decide what to copy:
 
 1. Identify the target response using the rules above.
 
-2. Write the raw markdown text to `/tmp/richcopy.md` using the Write tool. Do NOT convert to HTML yourself — a Perl script handles that.
+2. Write the raw markdown text to `$TEMP/richcopy.md` using the Write tool. Do NOT convert to HTML yourself — a Perl script handles that.
 
 3. Run the conversion and clipboard copy:
    ```bash
-   perl ~/.claude/skills/richcopy/md2html.pl C:/tmp/richcopy.md C:/tmp/richcopy.html && powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File "$(cygpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1)" -Path "$(cygpath -w C:/tmp/richcopy.html)"
+   perl ~/.claude/skills/richcopy/md2html.pl "$TEMP/richcopy.md" "$TEMP/richcopy.html" && powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File "$(cygpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1)" -Path "$(cygpath -w "$TEMP/richcopy.html")"
    ```
 
 4. Tell the user the content has been copied as rich text.

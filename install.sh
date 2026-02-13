@@ -12,6 +12,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cp "$SCRIPT_DIR/SKILL.md" "$SKILL_DIR/SKILL.md"
 cp "$SCRIPT_DIR/Set-HtmlClipboard.ps1" "$SKILL_DIR/Set-HtmlClipboard.ps1"
+cp "$SCRIPT_DIR/md2html.pl" "$SKILL_DIR/md2html.pl"
+cp -r "$SCRIPT_DIR/lib" "$SKILL_DIR/lib"
 
 echo "Installed richcopy skill to $SKILL_DIR"
 echo "Use /richcopy in Claude Code to copy the last response as rich text."

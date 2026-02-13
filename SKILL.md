@@ -18,22 +18,11 @@ Interpret $ARGUMENTS to decide what to copy:
 
 1. Identify the target response using the rules above.
 
-2. Convert it from Markdown to HTML:
-   - Use proper semantic tags: `<strong>`, `<em>`, `<h1>`–`<h6>`, `<ul>`/`<ol>`/`<li>`, `<pre><code>`, `<table>`, `<a>`, `<blockquote>`
-   - Use **inline CSS styles** (no classes/external stylesheets — clipboard HTML has no stylesheet support)
-   - Code blocks: `style="background-color:#f4f4f4; padding:8px; border-radius:4px; font-family:Consolas,monospace; white-space:pre-wrap; font-size:13px"`
-   - Tables: `border-collapse:collapse` on `<table>`, `border:1px solid #ccc; padding:6px` on `<td>`/`<th>`, bold `<th>` with light background
-   - Blockquotes: `style="border-left:3px solid #ccc; padding-left:12px; color:#555; margin:8px 0"`
-   - Paragraphs: wrap text blocks in `<p>` tags
-   - Do NOT include `<html>`, `<head>`, or `<body>` wrapper tags — the clipboard script adds those
+2. Write the raw markdown text to `/tmp/richcopy.md` using the Write tool. Do NOT convert to HTML yourself — a Perl script handles that.
 
-3. Write the HTML to a temp file using the Write tool. Use path `/tmp/richcopy.html`.
-
-4. Run the clipboard script:
+3. Run the conversion and clipboard copy:
    ```bash
-   SCRIPT=$(cygpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1 2>/dev/null || wslpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1 2>/dev/null)
-   HTMLFILE=$(cygpath -w /tmp/richcopy.html 2>/dev/null || wslpath -w /tmp/richcopy.html 2>/dev/null)
-   powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File "$SCRIPT" -Path "$HTMLFILE"
+   perl ~/.claude/skills/richcopy/md2html.pl C:/tmp/richcopy.md C:/tmp/richcopy.html && powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File "$(cygpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1)" -Path "$(cygpath -w C:/tmp/richcopy.html)"
    ```
 
-5. Tell the user the content has been copied as rich text.
+4. Tell the user the content has been copied as rich text.

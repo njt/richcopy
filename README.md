@@ -9,8 +9,8 @@ Works from both WSL and native Windows environments.
 ## Install
 
 ```bash
-git clone https://github.com/njt/md2clip.git
-cd md2clip
+git clone https://github.com/njt/richcopy.git
+cd richcopy
 ./install.sh
 ```
 

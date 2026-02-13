@@ -24,7 +24,7 @@ If $ARGUMENTS is provided, only copy the portion matching that description (e.g.
    ```bash
    SCRIPT=$(cygpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1 2>/dev/null || wslpath -w ~/.claude/skills/richcopy/Set-HtmlClipboard.ps1 2>/dev/null)
    HTMLFILE=$(cygpath -w /tmp/richcopy.html 2>/dev/null || wslpath -w /tmp/richcopy.html 2>/dev/null)
-   powershell.exe -STA -NoProfile -File "$SCRIPT" -Path "$HTMLFILE"
+   powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File "$SCRIPT" -Path "$HTMLFILE"
    ```
 
 4. Tell the user the content has been copied as rich text.
